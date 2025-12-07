@@ -3,4 +3,4 @@ const db = new sqlite3.Database("./data.db");
 
 module.exports = db;
 
-// Added
+// See the Difference
