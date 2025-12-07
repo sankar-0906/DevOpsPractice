@@ -4,6 +4,6 @@ const db = new sqlite3.Database("./data.db");
 module.exports = db;
 
 // See the Difference
+// for pull
 
-
-// this is practice command
+// Merged Command
