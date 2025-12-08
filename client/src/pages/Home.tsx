@@ -1,10 +1,13 @@
-import "../style.css";
-
 export default function Home() {
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
+
   return (
-    <div className="center">
+    <div>
       <h2>Home Page</h2>
-      <a href="http://localhost:5000/logout">Sign Out</a>
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }

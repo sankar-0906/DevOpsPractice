@@ -1,32 +1,32 @@
-import { useState } from "react";
-import "../style.css";
-
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  async function handleSubmit(e: any) {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/login", {
+
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({
+        email: e.target.email.value,
+        password: e.target.password.value
+      })
     });
+
     const data = await res.json();
-    if (data.success) window.location.href = "/home";
-    else alert("Invalid login");
-  }
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      window.location.href = "/home";
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="form">
-      <h3>Login</h3>
-      <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-      <input
-        placeholder="Password"
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button>Login</button>
-    </form>
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <input name="email" placeholder="Email" /><br />
+        <input name="password" type="password" placeholder="Password" /><br />
+        <button>Login</button>
+      </form>
+      <a href="/">Create new account</a>
+    </div>
   );
 }
