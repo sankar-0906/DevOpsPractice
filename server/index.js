@@ -8,9 +8,14 @@ const jwt = require("jsonwebtoken");
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173"
+  origin: [
+    "http://localhost:5173",      // local dev
+    "http://16.16.207.225:5173",  // deployed frontend
+    "http://16.16.207.225"        // if hosted on nginx
+  ],
+  credentials: true
 }));
-app.use(express.json());
+
 
 // DB Connection
 const db = mysql.createPool({
