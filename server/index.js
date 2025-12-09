@@ -15,7 +15,10 @@ app.use(cors({
   ],
   credentials: true
 }));
-
+app.use(express.json());           // <<< add this
+app.use(express.urlencoded({       // <<< optional
+  extended: true
+}));
 
 // DB Connection
 const db = mysql.createPool({
