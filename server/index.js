@@ -58,6 +58,10 @@ app.get("/users", async (req, res) => {
   res.json(rows);
 });
 
+db.getConnection()
+  .then(() => console.log("✅ MySQL Connected!"))
+  .catch(err => console.error("❌ MySQL connection error:", err));
+
 app.listen(process.env.PORT, () =>
   console.log(`Server running on ${process.env.PORT}`)
 );
